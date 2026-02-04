@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Arshiii 🖤</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Georgia, serif;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  background: black;
+}
+
+#bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4);
+  transition: 1.5s;
+  z-index: -2;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: -1;
+}
+
+#photo {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-top: 50px;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(255,255,255,0.4);
+}
+
+h1 {
+  margin-top: 20px;
+  text-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+#container {
+  position: relative;
+  height: 220px;
+  margin-top: 25px;
+}
+
+#yesBtn {
+  font-size: 20px;
+  padding: 15px 35px;
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255,0,0,0.6);
+}
+
+#noBtn {
+  font-size: 18px;
+  padding: 14px 30px;
+  background: #eee;
+  color: black;
+  border-radius: 20px;
+  position: absolute;
+}
+
+#warmText {
+  margin-top: 12px;
+  font-size: 14px;
+  opacity: 0;
+  color: #ff5f9e;
+}
+
+.heart {
+  position: absolute;
+  bottom: -40px;
+  font-size: 24px;
+  animation: up 6s linear forwards;
+}
+
+@keyframes up {
+  to { bottom: 100vh; opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+<div id="overlay"></div>
+
+<img id="photo" src="./her.jpg">
+
+<h1>Arshiii, will you be my girlfriend? 🖤</h1>
+
+<div id="container">
+  <button id="yesBtn" onclick="goSecret()">Yes 🖤</button>
+  <button id="noBtn" onclick="moveNo()">No 😢</button>
+</div>
+
+<div id="warmText">(getting warmer 🥵)</div>
+
+<script>
+/* background slideshow */
+const bgs = ["bg1.jpg","bg2.jpg","bg3.jpg","bg4.jpg","bg5.jpg"];
+let bgI = 0;
+const bg = document.getElementById("bg");
+function slideBg() {
+  bg.style.backgroundImage = `url('${bgs[bgI]}')`;
+  bgI = (bgI + 1) % bgs.length;
+}
+slideBg();
+setInterval(slideBg, 5000);
+
+/* button logic */
+let noCount = 0;
+let yesSize = 20;
+const yesBtn = document.getElementById("yesBtn");
+const warmText = document.getElementById("warmText");
+
+function moveNo() {
+  if (noCount >= 4) return;   // LIMIT NO clicks
+  noCount++;
+
+  noBtn.style.left = Math.random() * 280 + "px";
+  noBtn.style.top = Math.random() * 160 + "px";
+
+  if (noCount >= 2) warmText.style.opacity = 1;
+
+  if (yesSize < 44) {        // LIMIT YES growth
+    yesSize += 6;
+    yesBtn.style.fontSize = yesSize + "px";
+    warmText.style.fontSize = (yesSize - 10) + "px";
+  }
+}
+
+function goSecret() {
+  window.location.href = "secret.html";
+}
+
+/* hearts */
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random() * innerWidth + "px";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 900);
+</script>
+
+</body>
+</html>
